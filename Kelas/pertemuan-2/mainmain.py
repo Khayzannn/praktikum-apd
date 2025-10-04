@@ -7,21 +7,21 @@
 
 
 
-# Rumus: Total Bayar = Pemakaian × Tarif per kWh
+Rumus: Total Bayar = Pemakaian × Tarif per kWh
 
-# pemakaian = int(input("MASUKKAN KWh LISTRIK ANDA"))
+pemakaian = int(input("MASUKKAN KWh LISTRIK ANDA"))
 
-# total1 = pemakaian * 1200
-# total2 = pemakaian * 1500
-# total3 = pemakaian * 2000
-# if pemakaian <=100 :
-#     print(f'total tagihan anda {total1}')
+total1 = pemakaian * 1200
+total2 = pemakaian * 1500
+total3 = pemakaian * 2000
+if pemakaian <=100 :
+    print(f'total tagihan anda {total1}')
 
-# elif pemakaian <=300:
-#     print(f'total tagihan anda {total2}')
+elif pemakaian <=300:
+    print(f'total tagihan anda {total2}')
 
-# elif pemakaian > 300:
-#     print(f'total tagihan anda {total3}')
+elif pemakaian > 300:
+    print(f'total tagihan anda {total3}')
 
 #Wahana Roller Coaster Tornado Dufan memiliki ketentuan bagi para pengunjung, yakni pengunjung harus memiliki tinggi badan minimal 145 cm. 
 # Selain itu, pengunjung tidak
