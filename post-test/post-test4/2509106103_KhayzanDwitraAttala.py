@@ -7,7 +7,6 @@ fixedNIM = "2509106103"
 #variable attempt 
 percobaan = 0
 max = 3
-berhasil = False
 while percobaan < max:
     
     NamaAja = input('Masukkan Nama Anda: ')
@@ -20,7 +19,7 @@ while percobaan < max:
     elif NamaAja == fixedName and  NIM == fixedNIM:
         percobaan = max
         print(f'Selamat datang {NamaAja} silahkan pilih tiket')
-        berhasil = True
+        
         break  
     #jika gagal program akan berhenti
     else:
@@ -31,8 +30,6 @@ while percobaan < max:
         else:
             print('Login telah mencapai batas maksimal coba lagi nanti')
             exit()
-if berhasil:
-    print('\n')
 
 #list harga dan kategori tiket
 print('\t----- HARGA TIKET -----')
