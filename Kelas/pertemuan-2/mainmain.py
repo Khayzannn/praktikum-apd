@@ -11,7 +11,7 @@ total1 = pemakaian * 1200
 total2 = pemakaian * 1500
 total3 = pemakaian * 2000
 if pemakaian <=100 :
-    print(f'total tagihan anda {total1}')
+    print('total pemakaian', total1)
 
 elif pemakaian <=300:
     print(f'total tagihan anda {total2}')
