@@ -91,11 +91,13 @@ while True:
 |        Menu Admin         |
 =============================
 | 1. Lihat Stok Diecast     |
-| 2. Update Stok Diecast    |
-| 3. Keluar                 |
+| 2. Tambah Diecast Baru   |
+| 3. Update Stok Diecast   |
+| 4. Hapus Produk Diecast    |
+| 5. Keluar                 |
 =============================
                     ''')
-                pilihanAdmin = input('pilih menu ')
+                pilihanAdmin = input('pilih menu: ')
                 if pilihanAdmin == "1":
                     print('Daftar Produk dan stok')
                     
@@ -106,29 +108,85 @@ while True:
                         status = "Ready" if stok > 0 else "Not Ready"
                         print(f'{i}. {nama} - {stok} unit {status}')
                         i +=1
-                elif pilihanAdmin =='2':
+                elif pilihanAdmin == '2':
+                    
+                    print('=== TAMBAH PRODUK BARU ===')
+                    namaProduk = input('Nama produk baru: ').strip()
+                    jumlahStok = input('Jumlah stok: ').strip()
+                    harga = input('Harga produk: ').strip()
+
+    
+                    if jumlahStok.isdigit() and harga.isdigit():
+                        jumlahStok = int(jumlahStok)
+                        harga = int(harga)
+
+      
+                        ada = False
+                        for item in produk:
+                            if item[0].lower() == namaProduk.lower():
+                                ada = True
+                                break
+
+                        if ada:
+                            print(f"Produk {namaProduk} sudah ada. Gunakan menu update stok.")
+                        else:
+                            produk.append([namaProduk, jumlahStok, harga])
+                            print(f"Produk {namaProduk} berhasil ditambahkan dengan stok {jumlahStok} unit dan harga Rp{harga:,}")
+                    else:
+                        print("Input stok dan harga harus berupa angka!")
+
+
+
+                elif pilihanAdmin =='3':
                     print('===DAFTAR PRODUK===')
                     i = 1
                     for item in produk:
                         print(f'{i}. {item[0]} - {item[1]} unit')
                         i+=1
-                    pilihProduk=  int(input('Pilih Nomor produk: '))
-                    namaProduk = produk[pilihProduk-1] [0]
-
-                    action = input('Tambah/Kurangi: ').strip().lower()
-                    jumlah = int(input('Berapa jumlahnya: '))
-
-                    if action == "tambah":
-                        produk[pilihProduk-1] [1] += jumlah
-                    elif action == 'kurang':
-                        produk[pilihProduk-1] [1] -= jumlah
-
-                        if produk[pilihProduk-1] [1] < 0:
-                            produk[pilihProduk-1] [1] = 0
-                    print(f'stok {namaProduk} sekarang adalah {produk[pilihProduk-1] [1]} unit')
-                    continue
+                    pilihProduk =  input('Pilih Nomor produk: ')
                     
-                elif pilihanAdmin == '3':
+                    if pilihProduk.isdigit():
+                        indexList = int(pilihProduk) -1
+                        if 0 <= indexList < len(produk):
+                            namaProduk = produk[indexList] [0]
+
+                            action = input('Tambah/Kurangi: ').strip().lower()
+                            jumlah = int(input('Berapa jumlahnya: '))
+                            if action == "tambah":
+                                produk[indexList] [1] += jumlah
+                            elif action == 'kurangi':
+                                produk[indexList] [1] -= jumlah
+
+                                if produk[indexList] [1] < 0:
+                                    produk[indexList] [1] = 0
+                            print(f'stok {namaProduk} sekarang adalah {produk[indexList] [1]} unit')
+                    else:
+                        print('input harus berupa angka')
+                elif pilihanAdmin == '4':
+                    print('Daftar Produk dan stok')
+                    
+                    i= 1
+                    for item in produk:
+                        nama = item[0]
+                        stok = item[1]
+                        status = "Ready" if stok > 0 else "Not Ready"
+                        print(f'{i}. {nama} - {stok} unit {status}')
+                        i +=1
+                    hapusDiecast = input('Pilih nomor produk yang ingin dihapus:  ')
+                    if hapusDiecast.isdigit():
+                        hapusDiecast = int(hapusDiecast) -1
+                        if 0 <= hapusDiecast < len(produk):
+                            namaProduk
+                            confirm = input('Apakah anda benar benar ingin menghapus produk? (ya/tidak): ').strip().lower()
+                            if confirm =='ya':
+                                produk.pop(hapusDiecast)
+                                print('Produk berhasil dihapus')
+                            elif confirm == 'tidak':
+                                print(f'Batal menghapus {namaProduk}')
+                            else:
+                                print('Jawaban tidak valid')
+                    
+                elif pilihanAdmin == '5':
                     break
                 else:
                     print('Pilihan tidak valid')
@@ -156,22 +214,29 @@ while True:
                     i = 1
                     for item in produk:
                         status = 'Ready' if item[1] > 0 else "Not Ready"
-                        print(f'{i}. {item[0]} - {item[1]} unit ({status}) - Rp {item[2]:,}')
-                        i+=1
-                    pilihProduk = int(input('Pilih produk (input harus dengan angka): '))
-                    if produk [pilihProduk-1] [1] > 0:
+                        print(f"{i}. {item[0]} - {item[1]} unit ({status}) - Rp{item[2]:,}")
+                        i += 1
 
-                            jumlahBeli = int(input('Jumlah Yang ingin dibeli: '))
-                            if jumlahBeli <= produk [pilihProduk-1] [1]:
+                    pilihProduk = input("Pilih produk (input harus dengan angka): ")
 
-                                produk[pilihProduk-1] [1] -= jumlahBeli
-                                total = jumlahBeli * produk[pilihProduk-1] [2]
-                                print(f'{jumlahBeli} telah dibeli {produk[pilihProduk-1] [0]} total Rp {total:,}')
-
+                    if pilihProduk.isdigit():
+                        indexProduk = int(pilihProduk) - 1   # -1 karena list mulai dari 0
+                        if 0 <= indexProduk < len(produk):
+                            if produk[indexProduk][1] > 0:
+                                jumlahBeli = int(input("Jumlah yang ingin dibeli: "))
+                                if jumlahBeli <= produk[indexProduk][1]:
+                                    produk[indexProduk][1] -= jumlahBeli
+                                    total = jumlahBeli * produk[indexProduk][2]
+                                    print(f"{jumlahBeli} unit {produk[indexProduk][0]} berhasil dibeli. Total Rp{total:,}")
+                                else:
+                                    print("Stok tidak mencukupi!")
                             else:
-                                print('stok tidak mencukupi')
+                                print("Produk tidak tersedia!")
+                        else:
+                            print("Nomor produk tidak valid!")
                     else:
-                        ('produk tidak tersedia')
+                        print("Input harus berupa angka!")
+
                 elif pilihanBuyer == "3":
                     break
 
